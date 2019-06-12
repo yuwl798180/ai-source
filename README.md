@@ -34,7 +34,7 @@
 
 1. [hankcs](http://www.hankcs.com/)
 
-1. [paperswithcode and sota](https://paperswithcode.com/)
+2. [paperswithcode and SOTA](https://paperswithcode.com/)
 
 1. [EPS 数据平台](http://olap.epsnet.com.cn/)
 
@@ -82,8 +82,6 @@
 1. [Interpretable Machine Learning](https://christophm.github.io/interpretable-ml-book/index.html)
 
 ## 个人总结
-
-1. [research](/markdown/research.md)
 
 1. [python 基础](markdown/python基础.md)
 
