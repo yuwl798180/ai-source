@@ -53,7 +53,7 @@
 
 1. [scikit-learn](https://scikit-learn.org/)
 
-1. [pytorch 官网](https://pytorch.org/) [torchtext](https://torchtext.readthedocs.io/)
+1. [pytorch 官网](https://pytorch.org/) [pyro](https://pyro.ai/) [OpenNMT](http://opennmt.net/)
 
 1. GNN: [PyG](https://rusty1s.github.io/pytorch_geometric/) [DGL](https://www.dgl.ai/)
 
