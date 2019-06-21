@@ -38,6 +38,8 @@
 
 1. [EPS 数据平台](http://olap.epsnet.com.cn/)
 
+1. [baidu dataset](http://ai.baidu.com/broad)
+
 1. [datasetlist](https://www.datasetlist.com/) and [stateoftheart](https://www.stateoftheart.ai/)
 
 | 比赛                                  | 备注 |
