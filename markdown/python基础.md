@@ -3,6 +3,7 @@
 - [基础运算](#基础运算)
 - [字符串](#字符串)
 - [list/tuple/set](#listtupleset)
+- [读写数据](#读写数据)
 - [流程控制](#流程控制)
 - [类/继承](#类继承)
 - [书写风格](#书写风格)
@@ -107,6 +108,25 @@ dict.setdefault(keyname, value)
 1. 列表(list)：中括号、可以有相同元素、可以进行增删改查
 
 1. 集合(set)：大括号、不存放相同元素，创建用 set()
+
+## 读写数据
+
+```python
+import os
+import json
+
+datas = []
+open with(fp) as f:
+    for l in f:
+        line = json.loads(l)
+        datas.append(line)
+
+open with(fn, 'w') as f:
+    f.write(os.linesep.join([
+        json.dumps(i, ensure_ascii=False) for i in datas
+    ]))
+
+```
 
 ## 流程控制
 
