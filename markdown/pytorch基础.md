@@ -35,7 +35,6 @@ import torch.optim as optim
 import torch.nn.functional as F
 from torch.utils.data import Dataset, DataLoader
 from torch.nn.utils.rnn import pad_sequence, pack_sequence, pad_packed_sequence, pack_padded_sequence
-from torchsummaryX import summary
 from torchvision import datasets, transforms, utils
 
 import os
@@ -51,9 +50,9 @@ import unicodedata
 
 import numpy as np
 import pandas as pd
-from skimage import io, transform
 from matplotlib import pyplot as plt
 from tqdm import tqdm
+from skimage import io, transform
 ```
 
 ### 检查配置
@@ -110,6 +109,7 @@ torch.save({
     'optimizer_state_dict': optimizer.state_dict(),
     'loss': loss
 }, PATH)
+
 # 加载模型
 model = TheModelClass(*args, **kwargs)
 optimizer = TheOptimizerClass(*args, **kwargs)
@@ -118,6 +118,7 @@ model.load_state_dict(checkpoint['model_state_dict'])
 optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
 epoch = checkpoint['epoch']
 loss = checkpoint['loss']
+
 model.eval()
 # - or -
 model.train()
