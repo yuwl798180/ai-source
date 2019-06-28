@@ -95,47 +95,43 @@ if torch.cuda.device_count() > 1:
 torch.cuda.empty_cache()
 
 # 保存加载模型参数
-torch.save(model.state_dict(), 'some_model.pth')
-some_model.load_state_dict(torch.load('some_model.pth'))
+torch.save(model.state_dict(), 'some_model.pt')
+some_model.load_state_dict(torch.load('some_model.pt'))
 
 # 保存整个模型（很少这么做）
 torch.save(model, PATH)
 model = torch.load(PATH)
 
-# 保存训练时的 checkpoint
+# 保存训练时的 checkpoint (.tar)
 torch.save({
     'epoch': epoch,
-    'model_state_dict': model.state_dict(),
-    'optimizer_state_dict': optimizer.state_dict(),
-    'loss': loss
+    'modelA_state_dict': modelA.state_dict(),
+    'modelB_state_dict': modelB.state_dict(),
+    'optimizerA_state_dict': optimizerA.state_dict(),
+    'optimizerB_state_dict': optimizerB.state_dict(),
+    'loss': loss,
+    'embedding': embedding.state_dict()
 }, PATH)
 
 # 加载模型
-model = TheModelClass(*args, **kwargs)
-optimizer = TheOptimizerClass(*args, **kwargs)
+modelA = TheModelAClass(*args, **kwargs)
+modelB = TheModelBClass(*args, **kwargs)
+optimizerA = TheOptimizerAClass(*args, **kwargs)
+optimizerB = TheOptimizerBClass(*args, **kwargs)
 checkpoint = torch.load(PATH)
-model.load_state_dict(checkpoint['model_state_dict'])
-optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+checkpoint = torch.load(PATH)
+modelA.load_state_dict(checkpoint['modelA_state_dict'])
+modelB.load_state_dict(checkpoint['modelB_state_dict'])
+optimizerA.load_state_dict(checkpoint['optimizerA_state_dict'])
+optimizerB.load_state_dict(checkpoint['optimizerB_state_dict'])
 epoch = checkpoint['epoch']
 loss = checkpoint['loss']
-
-model.eval()
-# - or -
-model.train()
+embedding = checkpoint['embedding']
+modelA.eval()  # train()
+modelB.eval()  # train()
 
 # 保存 torch.nn.DataParallel 模型
 torch.save(model.module.state_dict(), PATH)
-
-# Save on GPU, Load on CPU
-model.load_state_dict(torch.load(PATH, map_location=device))
-
-# Save on GPU, Load on GPU
-model.load_state_dict(torch.load(PATH))
-model.to(device)  # Make sure to call input = input.to(device)
-
-# Save on CPU, Load on GPU
-model.load_state_dict(torch.load(PATH, map_location="cuda:0"))  # GPU device number
-model.to(device)  # Make sure to call input = input.to(device)
 
 # 保存 arguments 到 config.txt
 opt = parser.parse_args()
@@ -147,11 +143,6 @@ for name, parameters in model.named_parameters():
     print(name, ':', parameters.size())
 num_parameters = sum(torch.numel(parameter) for parameter in model.parameters())
 print(num_parameters)
-
-# 使用 torchsummary / torchsummaryX
-from torchsummary import summary
-summary(your_model, input_size=(channels, H, W), batch_size=-1)
-summary(your_model, x=torch.zeros(B, C, H, W))
 ```
 
 ### 常用操作
