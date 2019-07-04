@@ -56,6 +56,18 @@ bool({})    # => False
 ## list/tuple/set
 
 ```python
+# 构造队列
+# 方法有：append(x)  appendleft(x)
+#        pop()      popleft()
+from collections import deque
+q = deque(maxlen=5)
+q.append(2)
+q.appendleft(1)
+q.pop()
+q.popleft()
+```
+
+```python
 # mutable
 
 li.insert(i, x): 在 index i 处添加 x，只能添加一个
