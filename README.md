@@ -16,8 +16,6 @@
 
 1. [cs224n](https://cs224d.stanford.edu/) [【B 站镜像】](https://www.bilibili.com/video/av46216519)
 
-1. [100-Days-Of-ML-Code](https://github.com/Avik-Jain/100-Days-Of-ML-Code) [【中文版】](https://github.com/MLEveryday/100-Days-Of-ML-Code)
-
 1. [统计学习方法](https://github.com/fengdu78/lihang-code)
 
 ---
@@ -32,15 +30,21 @@
 
 ## 实用网站
 
+1. [Arxiv](https://arxiv.org/) and [daily arxiv](http://dailyarxiv.com/)
+
+1. [paper with code](https://paperswithcode.com/)
+
+1. [ML datasetlist](https://www.datasetlist.com/)
+
+1. [state of the art](https://www.stateoftheart.ai/)
+
+---
+
+1. [baidu dataset](https://ai.baidu.com/broad)
+
 1. [hankcs](http://www.hankcs.com/)
 
-2. [paperswithcode and SOTA](https://paperswithcode.com/)
-
-1. [EPS 数据平台](http://olap.epsnet.com.cn/)
-
-1. [baidu dataset](http://ai.baidu.com/broad)
-
-1. [datasetlist](https://www.datasetlist.com/) and [stateoftheart](https://www.stateoftheart.ai/)
+---
 
 | 比赛                                  | 备注 |
 | ------------------------------------- | ---- |
@@ -55,13 +59,15 @@
 
 1. [scikit-learn](https://scikit-learn.org/)
 
-1. [pytorch 官网](https://pytorch.org/) [pyro](https://pyro.ai/) [OpenNMT](http://opennmt.net/)
+1. [tensorflow](https://www.tensorflow.org/)
 
-1. GNN: [PyG](https://rusty1s.github.io/pytorch_geometric/) [DGL](https://www.dgl.ai/)
+1. [pytorch](https://pytorch.org/) and [pyro](https://pyro.ai/)
 
-1. [keras](https://keras.io/) [【中文版本】](https://keras.io/zh/)
+1. [keras](https://keras.io/) [【中文版】](https://keras.io/zh/)
 
 1. [tensorflow 官网](https://www.tensorflow.org/)
+
+1. [PyG](https://pytorch-geometric.readthedocs.io) and [DGL](https://www.dgl.ai/)
 
 ## NLP
 
@@ -79,7 +85,7 @@
 
 1. []()
 
-## other
+## Other
 
 1. [Interpretable Machine Learning](https://christophm.github.io/interpretable-ml-book/index.html)
 
