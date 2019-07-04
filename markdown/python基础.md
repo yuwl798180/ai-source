@@ -474,5 +474,6 @@ eat(jelly_bean for jelly_bean in jelly_beans
 ```python
 with open('hello.txt') as hello_file:
     for line in hello_file:
-        print(line)
+        instance = json.loads(line)
+        print(instance)
 ```
