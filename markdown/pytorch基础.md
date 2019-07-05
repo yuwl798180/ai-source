@@ -7,6 +7,7 @@
     - [常用操作](#常用操作)
 - [Advanced](#advanced)
     - [RNN/LSTM/GRU](#rnnlstmgru)
+    - [packed padded](#packed-padded)
     - [读取 csv 数据](#读取-csv-数据)
     - [使用 tensorboardX](#使用-tensorboardx)
     - [构建 CustomDataset](#构建-customdataset)
@@ -80,7 +81,8 @@ torch.cuda.is_available()
 # GPU Usage
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 net.to(device)
-input_tensor.to(device)
+input_tensor = input_tensor.to(device)
+input_tensor = input_tensor.cuda(device)
 
 # 指定程序运行在特定GPU卡上
 os.environ['CUDA_VISIBLE_DEVICES'] = '0,1'
@@ -231,6 +233,18 @@ h0 = torch.randn(num_layers * num_directions, batch, hidden_size)
 output, hn = gru(inputs, h0)
 output of shape: (seq_len, batch, num_directions * hidden_size)
 hn of shape: (num_layers * num_directions, batch, hidden_size)
+```
+
+### packed padded
+```python
+# 保证 rnn parallel，最好把最长的长度单独拿出来
+class Net(nn.Module):
+    def forward(self, padded_input, input_lengths):
+        total_length = padded_input.size(1)  # get the max sequence length
+        packed_input = pack_padded_sequence(padded_input,input_lengths,batch_first=True)
+        output, hidden = self.lstm(packed_input)
+        output, _  = pad_packed_sequence(output, batch_first=True, total_length=total_length)
+        return output, hidden
 ```
 
 ### 读取 csv 数据
@@ -444,6 +458,8 @@ class AttnDecoderRNN(nn.Module):
 1. 将「DataSet」从主程序的代码中分离，其中尽量只包含只读对象，避免修改可变对象。并且高负载操作放在 `__getitem__` 中，如加载图片。
 
 1. 如果可能的话，请使用「Use.detach()」从计算图中释放张量。为了实现自动微分，PyTorch 会跟踪所有涉及张量的操作。请使用「.detach()」来防止记录不必要的操作。
+
+1. 不要使用 `total_loss += loss`，因为这样会导致 loss（可微变量）的累积。使用 `total_loss += float(loss)` 即可。
 
 ## Code
 
