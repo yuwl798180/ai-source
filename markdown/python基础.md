@@ -68,6 +68,34 @@ q.popleft()
 ```
 
 ```python
+# 统计词频
+# 还可以执行 + - 运算
+from collections import Counter
+
+words = [
+    'look', 'into', 'my', 'eyes', 'look', 'into', 'my', 'eyes',
+    'the', 'eyes', 'the', 'eyes', 'the', 'eyes', 'not', 'around', 'the',
+    'eyes', "don't", 'look', 'around', 'the', 'eyes', 'look', 'into',
+    'my', 'eyes', "you're", 'under'
+]
+morewords = ['why','are','you','not','looking','in','my','eyes']
+
+word_counts =Counter(words)
+print(word_counts)
+zipped = word_counts.most_common()
+words_c, count_w = zip(*zipped)
+print(words_c)
+print(count_w)
+word_counts.update(morewords)
+print(word_counts)
+
+
+a = Counter(words)
+b = Counter(morewords)
+print(a,b,a+b,a-b,sep='\n')
+```
+
+```python
 # mutable
 
 li.insert(i, x): 在 index i 处添加 x，只能添加一个
