@@ -8,6 +8,7 @@
 - [Advanced](#advanced)
     - [RNN/LSTM/GRU](#rnnlstmgru)
     - [packed padded](#packed-padded)
+    - [取出padding后的词向量](#取出padding后的词向量)
     - [读取 csv 数据](#读取-csv-数据)
     - [使用 tensorboardX](#使用-tensorboardx)
     - [构建 CustomDataset](#构建-customdataset)
@@ -245,6 +246,13 @@ class Net(nn.Module):
         output, hidden = self.lstm(packed_input)
         output, _  = pad_packed_sequence(output, batch_first=True, total_length=total_length)
         return output, hidden
+```
+
+### 取出padding后的词向量
+```python
+x = torch.tensor([[1,2,0,4,0],[3,2,3,0,0]])
+mask = x.ne(0)
+x[mask] ## tensor([1, 2, 4, 3, 2, 3])
 ```
 
 ### 读取 csv 数据
