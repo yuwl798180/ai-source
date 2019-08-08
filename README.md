@@ -12,6 +12,8 @@
 
 1. [吴恩达深度学习-网易云课堂](https://mooc.study.163.com/smartSpec/detail/1001319001.htm) [【作业】](https://github.com/stormstone/deeplearning.ai) [【笔记】](http://www.ai-start.com/dl2017/)
 
+1. [李宏毅机器学习](https://datawhalechina.github.io/leeml-notes/)
+
 1. [神经网络与深度学习-邱锡鹏](https://nndl.github.io/)
 
 1. [cs224n](https://cs224d.stanford.edu/) [【B 站镜像】](https://www.bilibili.com/video/av46216519)
