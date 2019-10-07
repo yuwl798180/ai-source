@@ -4,8 +4,8 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import copy
 
-cat_path = "../data/imgTransfer/cat.jpg"
-style_path = "../data/imgTransfer/style.jpg"
+cat_path = "../../data/imgTransfer/cat.jpg"
+style_path = "../../data/imgTransfer/style.jpg"
 
 
 def load_img(path=None):
@@ -144,7 +144,10 @@ while epoch[0] <= epoch_n:
 
         if epoch[0] % 2 == 0:
             print('Epoch:{} Style Loss: {:4f} Content Loss:{:4f}'.format(
-                epoch[0], style_score.data, content_score.data))
+                epoch[0],
+                style_score.data,
+                content_score.data,
+            ))
 
             output = new_model(input_img)
             # print(output.size.view(-1, 224, 224))

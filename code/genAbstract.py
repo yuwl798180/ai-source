@@ -91,8 +91,7 @@ def _get_article_summary(sentences, sentence_weight, threshold):
     article_summary = ''
 
     for sent_idx, sentence in enumerate(sentences):
-        if sent_idx in sentence_weight and sentence_weight[sent_idx] >= (
-                threshold):
+        if sent_idx in sentence_weight and sentence_weight[sent_idx] >= (threshold):
             article_summary += " " + sentence
             sentence_counter += 1
 
@@ -114,8 +113,7 @@ def _run_article_summary(article):
     threshold = _calculate_average_score(sentence_scores)
 
     # producing the summary
-    article_summary = _get_article_summary(sentences, sentence_scores,
-                                           1.2 * threshold)
+    article_summary = _get_article_summary(sentences, sentence_scores, 1.2 * threshold)
 
     return article_summary
 

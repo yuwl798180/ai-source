@@ -4,8 +4,5 @@
 *.pyc
 
 data
-ebook
-pdf
-zresearch
 
-test.py
+demo.py

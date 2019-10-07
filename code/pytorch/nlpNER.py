@@ -22,8 +22,7 @@ def prepare_sequence(seq, to_ix):
 def log_sum_exp(vec):
     max_score = vec[0, argmax(vec)]
     max_score_broadcast = max_score.view(1, -1).expand(1, vec.size()[1])
-    return max_score + torch.log(
-        torch.sum(torch.exp(vec - max_score_broadcast)))  # 减去最大值避免指数爆炸
+    return max_score + torch.log(torch.sum(torch.exp(vec - max_score_broadcast)))  # 减去最大值避免指数爆炸
 
 
 class BiLSTM_CRF(nn.Module):
@@ -36,18 +35,14 @@ class BiLSTM_CRF(nn.Module):
         self.tagset_size = len(tag_to_ix)
 
         self.word_embeds = nn.Embedding(vocab_size, embedding_dim)
-        self.lstm = nn.LSTM(embedding_dim,
-                            hidden_dim // 2,
-                            num_layers=1,
-                            bidirectional=True)
+        self.lstm = nn.LSTM(embedding_dim, hidden_dim // 2, num_layers=1, bidirectional=True)
 
         # Maps the output of the LSTM into tag space.
         self.hidden2tag = nn.Linear(hidden_dim, self.tagset_size)
 
         # Matrix of transition parameters.  Entry i,j is the score of transitioning *to* i *from* j.
         # 转移矩阵直接随机初始化放到nn参数里，秀！
-        self.transitions = nn.Parameter(
-            torch.randn(self.tagset_size, self.tagset_size))
+        self.transitions = nn.Parameter(torch.randn(self.tagset_size, self.tagset_size))
 
         # These two statements enforce the constraint that we never transfer
         # to the start tag and we never transfer from the stop tag
@@ -57,8 +52,7 @@ class BiLSTM_CRF(nn.Module):
         self.hidden = self.init_hidden()
 
     def init_hidden(self):
-        return (torch.randn(2, 1, self.hidden_dim // 2),
-                torch.randn(2, 1, self.hidden_dim // 2))
+        return (torch.randn(2, 1, self.hidden_dim // 2), torch.randn(2, 1, self.hidden_dim // 2))
 
     def _forward_alg(self, feats):
         # Do the forward algorithm to compute the partition function
@@ -74,8 +68,7 @@ class BiLSTM_CRF(nn.Module):
             alphas_t = []  # The forward tensors at this timestep
             for next_tag in range(self.tagset_size):
                 # broadcast the emission score: it is the same regardless of the previous tag
-                emit_score = feat[next_tag].view(1, -1).expand(
-                    1, self.tagset_size)
+                emit_score = feat[next_tag].view(1, -1).expand(1, self.tagset_size)
                 # the ith entry of trans_score is the score of transitioning to
                 # next_tag from i
                 trans_score = self.transitions[next_tag].view(1, -1)
@@ -101,13 +94,9 @@ class BiLSTM_CRF(nn.Module):
     def _score_sentence(self, feats, tags):
         # Gives the score of a provided tag sequence
         score = torch.zeros(1)
-        tags = torch.cat([
-            torch.tensor([self.tag_to_ix[START_TAG]], dtype=torch.long), tags
-        ])
+        tags = torch.cat([torch.tensor([self.tag_to_ix[START_TAG]], dtype=torch.long), tags])
         for i, feat in enumerate(feats):
-            score = score + self.transitions[tags[i +
-                                                  1], tags[i]] + feat[tags[i +
-                                                                           1]]
+            score = score + self.transitions[tags[i + 1], tags[i]] + feat[tags[i + 1]]
         score = score + self.transitions[self.tag_to_ix[STOP_TAG], tags[-1]]
         return score
 
@@ -176,12 +165,9 @@ EMBEDDING_DIM = 5
 HIDDEN_DIM = 4
 
 # Make up some training data
-training_data = [
-    ("the wall street journal reported today that apple corporation made money"
-     .split(), "B I I I O O O B I O O".split()),
-    ("georgia tech is a university in georgia".split(),
-     "B I O O O O B".split())
-]
+training_data = [("the wall street journal reported today that apple corporation made money".split(),
+                  "B I I I O O O B I O O".split()),
+                 ("georgia tech is a university in georgia".split(), "B I O O O O B".split())]
 
 word_to_ix = {}
 for sentence, tags in training_data:
@@ -197,8 +183,7 @@ optimizer = optim.SGD(model.parameters(), lr=0.01, weight_decay=1e-4)
 # Check predictions before training
 with torch.no_grad():
     precheck_sent = prepare_sequence(training_data[0][0], word_to_ix)
-    precheck_tags = torch.tensor([tag_to_ix[t] for t in training_data[0][1]],
-                                 dtype=torch.long)
+    precheck_tags = torch.tensor([tag_to_ix[t] for t in training_data[0][1]], dtype=torch.long)
     print(model(precheck_sent))
 
 for epoch in range(300):

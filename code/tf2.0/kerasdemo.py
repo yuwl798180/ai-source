@@ -9,9 +9,7 @@ model.add(Dense(50, activation='relu', input_dim=100))
 model.add(Dense(10, activation='softmax'))
 print(model.summary())
 
-model.compile(optimizer=keras.optimizers.Adam(),
-              loss=keras.losses.categorical_crossentropy,
-              metrics=['accuracy'])
+model.compile(optimizer=keras.optimizers.Adam(), loss=keras.losses.categorical_crossentropy, metrics=['accuracy'])
 
 x_train = np.random.randn(1000, 100)
 y_train = np.random.randint(10, size=(1000, 1))

@@ -511,9 +511,39 @@ eat(jelly_bean for jelly_bean in jelly_beans
     if jelly_bean.color == 'black')
 ```
 
+## plt画图
+
 ```python
-with open('hello.txt') as hello_file:
-    for line in hello_file:
-        instance = json.loads(line)
-        print(instance)
+import matplotlib.pyplot as plt
+
+hist = {
+    'epoch': [1, 2, 3, 4, 5],
+    'mae': [1, 2, 3, 4, 5],
+    'val_mae': [1, 2.1, 3.2, 4.3, 5.4],
+    'mse': [1, 2, 3, 4, 5],
+    'val_mse': [1, 2.1, 3.2, 4.3, 5.4],
+}
+
+
+def plot_history(hist):
+
+    plt.figure(figsize=(16,10))
+    plt.xlabel('Epoch')
+    plt.ylabel('Mean Abs Error [MPG]')
+    plt.plot(hist['epoch'], hist['mae'], label='Train Error')
+    plt.plot(hist['epoch'], hist['val_mae'], label='Val Error')
+    plt.ylim([0, 5])
+    plt.legend()
+
+    plt.figure()
+    plt.xlabel('Epoch')
+    plt.ylabel('Mean Square Error [$MPG^2$]')
+    plt.plot(hist['epoch'], hist['mse'], label='Train Error')
+    plt.plot(hist['epoch'], hist['val_mse'], label='Val Error')
+    plt.ylim([0, 20])
+    plt.legend()
+    plt.show()
+
+
+plot_history(hist)
 ```

@@ -2,41 +2,23 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
+from torch.utils.data import DataLoader
 import torchvision
 import torchvision.transforms as transforms
-from torchsummary import summary
-from tensorboardX import SummaryWriter
 
 torch.manual_seed(1)
-writer = SummaryWriter()
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(device)
 
-transform = transforms.Compose([
-    transforms.ToTensor(),
-    transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
-])
+transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
-trainset = torchvision.datasets.CIFAR10(root='../data',
-                                        train=True,
-                                        download=True,
-                                        transform=transform)
-trainloader = torch.utils.data.DataLoader(trainset,
-                                          batch_size=4,
-                                          shuffle=True,
-                                          num_workers=2)
+trainset = torchvision.datasets.CIFAR10(root='../../data', train=True, download=True, transform=transform)
+trainloader = DataLoader(trainset, batch_size=4, shuffle=True, num_workers=2)
 
-testset = torchvision.datasets.CIFAR10(root='../data',
-                                       train=False,
-                                       download=True,
-                                       transform=transform)
-testloader = torch.utils.data.DataLoader(testset,
-                                         batch_size=4,
-                                         shuffle=False,
-                                         num_workers=2)
+testset = torchvision.datasets.CIFAR10(root='../../data', train=False, download=True, transform=transform)
+testloader = DataLoader(testset, batch_size=4, shuffle=False, num_workers=2)
 
-classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse',
-           'ship', 'truck')
+classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
 
 class Net(nn.Module):
@@ -69,12 +51,9 @@ if torch.cuda.device_count() > 1:
     net = nn.DataParallel(net)
 net.to(device)
 
-# print(net)
-# for name, parameters in net.named_parameters():
-#     print(name, ':', parameters.size())
-
-# use porchsummary
-summary(net, input_size=(3, 32, 32), batch_size=4)
+print(net)
+for name, parameters in net.named_parameters():
+    print(name, ':', parameters.size())
 
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
@@ -96,11 +75,8 @@ for epoch in range(1):  # loop over the dataset multiple times
 
         running_loss += loss.item()
         if i % 2000 == 1999:  # print every 2000 mini-batches
-            writer.add_scalar('loss', running_loss / 2000)
-            print('[%d, %5d] loss: %.3f' %
-                  (epoch + 1, i + 1, running_loss / 2000))
+            print('[%d, %5d] loss: %.3f' % (epoch + 1, i + 1, running_loss / 2000))
             running_loss = 0.0
-writer.close()
 print('Finished Training!')
 
 correct = 0
@@ -113,8 +89,7 @@ with torch.no_grad():
         _, predicted = torch.max(outputs.data, 1)
         total += labels.size(0)
         correct += (predicted == labels).sum().item()
-print('Accuracy of the network on the 10000 test images: %d %%' %
-      (100 * correct / total))
+print('Accuracy of the network on the 10000 test images: %d %%' % (100 * correct / total))
 
 class_correct = list(0. for i in range(10))
 class_total = list(0. for i in range(10))
@@ -131,5 +106,4 @@ with torch.no_grad():
             class_total[label] += 1
 for i in range(10):
     print('Accuracy of %5s : %2d %% (%4d / % 4d)' %
-          (classes[i], 100 * class_correct[i] / class_total[i],
-           class_correct[i], class_total[i]))
+          (classes[i], 100 * class_correct[i] / class_total[i], class_correct[i], class_total[i]))

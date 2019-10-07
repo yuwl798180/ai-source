@@ -33,10 +33,8 @@ def example():
 EMBEDDING_DIM = 8
 HIDDEN_DIM = 12
 
-training_data = [
-    ("The dog ate the apple".split(), ["DET", "NN", "V", "DET", "NN"]),
-    ("Everybody read that book".split(), ["NN", "V", "DET", "NN"])
-]
+training_data = [("The dog ate the apple".split(), ["DET", "NN", "V", "DET", "NN"]),
+                 ("Everybody read that book".split(), ["NN", "V", "DET", "NN"])]
 
 word_to_id = {}
 tag_to_id = {"DET": 0, "NN": 1, "V": 2}
@@ -63,8 +61,7 @@ class LSTMTagger(nn.Module):
     def forward(self, sentence):
         embeds = self.word_embeddings(sentence)
         # print(embeds.size())  # sen_len * embedding_dim  5*8
-        lstm_out, _ = self.lstm(embeds.view(
-            len(sentence), 1, -1))  # input: sen_len,batch,input_size
+        lstm_out, _ = self.lstm(embeds.view(len(sentence), 1, -1))  # input: sen_len,batch,input_size
         # print(lstm_out.size())  # sen_len * batch * hidden_dim 5*1*12
         tag_space = self.hidden2tag(lstm_out.view(len(sentence), -1))
         # print(tag_space.size()) # sen_len * tagset_size 5 * 3
