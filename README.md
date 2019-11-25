@@ -44,6 +44,11 @@
 
 1. [hankcs](http://www.hankcs.com/)
 
+1. [AI算法手册](http://www.huaxiaozhuan.com/)
+
+---
+
+1. [open review](https://openreview.net/)
 
 ## Paper
 
@@ -99,6 +104,9 @@
 
 1. [Interpretable Machine Learning](https://christophm.github.io/interpretable-ml-book/index.html)
 
+1. [Tensor Space](https://tensorspace.org/)
+
+1. [seeing theory](https://seeing-theory.brown.edu/)
 
 ## 个人总结
 
