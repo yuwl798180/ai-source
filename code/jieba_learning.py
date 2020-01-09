@@ -3,6 +3,7 @@ import jieba
 import jieba.posseg as pseg
 import jieba.analyse
 
+
 # 添加自定义词典
 # 词典格式为：一个词占一行，每一行分三部分：词语、词频（可省略）、词性（可省略）。
 # lg_x5
@@ -67,3 +68,18 @@ if withWeight:
         print("tag: %s\t weight: %f" % (tag[0], tag[1]))
 else:
     print(tags_other)
+
+
+
+
+## pyhanlp
+from pyhanlp import HanLP
+# （繁体->简体，全角->半角，大写->小写）
+#  HanLP.Config.Normalization = True
+text = '你好，欢迎在Python中调用HanLP的API！'
+pas = HanLP.parseDependency(text)
+serializer = [i.LEMMA for i in pas]
+parsing = [i.HEAD.ID for i in pas]
+assert len(serializer) == len(parsing)
+print(serializer)
+print(parsing)
