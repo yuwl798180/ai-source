@@ -12,16 +12,16 @@
 
 1. [dev hints](https://devhints.io/) and [dev docs](https://devdocs.io/)
 
-1. [正则 命令](https://regexr.com/) and [Linux 命令](https://wangchujiang.com/linux-command/)
+1. [正则 命令](https://regexr.com/) and [Shell 命令](https://explainshell.com/) and [Linux 命令](https://jaywcjlove.gitee.io/linux-command/)
 
 
 ## 基础入门
 
 1. [数学基础](http://www.ai-start.com/dl2017/html/math.html)
 
-1. [机器学习的数学基础](https://zhuanlan.zhihu.com/p/25197792)
-
 1. [Python Cookbook](https://python3-cookbook.readthedocs.io/zh_CN/latest/)
+
+1. [AI算法手册](http://www.huaxiaozhuan.com/)
 
 ---
 
@@ -37,30 +37,23 @@
 
 1. [统计学习方法](https://github.com/fengdu78/lihang-code)
 
-
-## 其他网站
-
-1. [baidu dataset](https://ai.baidu.com/broad)
-
-1. [hankcs](http://www.hankcs.com/)
-
-1. [AI算法手册](http://www.huaxiaozhuan.com/)
-
----
-
-1. [open review](https://openreview.net/)
-
 ## Paper
 
 1. [conference call for paper](https://jackietseng.github.io/conference_call_for_paper/conferences.html)
+
+1. [open review](https://openreview.net/)
 
 1. [Arxiv](https://arxiv.org/) and [daily arxiv](http://dailyarxiv.com/)
 
 1. [paper with code](https://paperswithcode.com/)
 
-1. [ML datasetlist](https://www.datasetlist.com/)
+---
 
 1. [机器之心 stoa](https://www.jiqizhixin.com/sota)
+
+1. [nlp dataset](https://huggingface.co/nlp/)
+
+1. [ML datasetlist](https://www.datasetlist.com/)
 
 1. [state of the art](https://www.stateoftheart.ai/)
 
@@ -84,7 +77,7 @@
 
 1. [tensorflow](https://www.tensorflow.org/) and [tf2.0 usage](https://tf.wiki/)
 
-1. [pytorch](https://pytorch.org/) and [pyro](https://pyro.ai/)
+1. [pytorch](https://pytorch.org/) and [pyro](https://pyro.ai/) and [Captum](https://captum.ai/)
 
 1. [keras](https://keras.io/) [【中文版】](https://keras.io/zh/)
 
@@ -98,15 +91,27 @@
 1. [pytorch nlp model in cs224n](https://github.com/DSKSD/DeepNLP-models-Pytorch)
 
 
-## Other
+## 平台
 
-1. [图像增强](https://imgaug.readthedocs.io/)
+1. [Mo 人工智能建模平台](https://momodel.cn/)
+
+1. [思知](https://www.ownthink.com/)
+
+1. [学迹](https://xueji.zhiwenben.com/)
+
+1. [科学空间](https://spaces.ac.cn/)
+
+## Other
 
 1. [Interpretable Machine Learning](https://christophm.github.io/interpretable-ml-book/index.html)
 
 1. [Tensor Space](https://tensorspace.org/)
 
 1. [seeing theory](https://seeing-theory.brown.edu/)
+
+1. [TVM](https://tvm.apache.org/)
+
+1. [AI Bench](https://www.benchcouncil.org/AIBench/index.html)
 
 ## 个人总结
 
